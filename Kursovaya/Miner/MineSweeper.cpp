@@ -9,12 +9,12 @@
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
-Graphics::TBitmap *Picture;// для присваивания картинок
-TPanel *ArrayOfPanels[2];//массив панелей
-TImage *ArrayOfImages[6];//массив картинок
-TBitBtn *FaceButton;//кнопка с лицом
-bool isLose = 0,isWin = 0;//проверка на проигрыш и выигрыш
-unsigned int BombCount = 10,Size = 9;//для контроля текущего режима
+Graphics::TBitmap *Picture;// РґР»СЏ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ РєР°СЂС‚РёРЅРѕРє
+TPanel *ArrayOfPanels[2];//РјР°СЃСЃРёРІ РїР°РЅРµР»РµР№
+TImage *ArrayOfImages[6];//РјР°СЃСЃРёРІ РєР°СЂС‚РёРЅРѕРє
+TBitBtn *FaceButton;//РєРЅРѕРїРєР° СЃ Р»РёС†РѕРј
+bool isLose = 0,isWin = 0;//РїСЂРѕРІРµСЂРєР° РЅР° РїСЂРѕРёРіСЂС‹С€ Рё РІС‹РёРіСЂС‹С€
+unsigned int BombCount = 10,Size = 9;//РґР»СЏ РєРѕРЅС‚СЂРѕР»СЏ С‚РµРєСѓС‰РµРіРѕ СЂРµР¶РёРјР°
 
 class MineSweeper
 {
@@ -36,7 +36,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////заполнение клеток цифрами
+void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////Р·Р°РїРѕР»РЅРµРЅРёРµ РєР»РµС‚РѕРє С†РёС„СЂР°РјРё
 {
 	int num = 0;
 	for(int j = 1; j < Size - 1 ; j++)
@@ -67,7 +67,7 @@ void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////запол
 			{
 				num++;
 			}
-			if(MineSweeperArray[i-1][j-1].isBomb) //Центр
+			if(MineSweeperArray[i-1][j-1].isBomb) //Р¦РµРЅС‚СЂ
 			{
 				num++;
 			}
@@ -100,7 +100,7 @@ void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////запол
 			{
 				num++;
 			}
-			MineSweeperArray[0][i].BombCount = num;      //Левый край
+			MineSweeperArray[0][i].BombCount = num;      //Р›РµРІС‹Р№ РєСЂР°Р№
 		 }
 
 		 for(int i = 1;i < Size - 1; i++ , num = 0)
@@ -121,7 +121,7 @@ void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////запол
 			{
 				num++;
 			}
-			if(MineSweeperArray[Size-2][i].isBomb)//Правый край
+			if(MineSweeperArray[Size-2][i].isBomb)//РџСЂР°РІС‹Р№ РєСЂР°Р№
 			{
 				num++;
 			}
@@ -146,7 +146,7 @@ void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////запол
 			{
 				num++;
 			}
-			if(MineSweeperArray[i-1][1].isBomb)//Верх
+			if(MineSweeperArray[i-1][1].isBomb)//Р’РµСЂС…
 			{
 				num++;
 			}
@@ -174,7 +174,7 @@ void __fastcall  TForm1::CountBombsNearCells(unsigned int Size)////////////запол
 				{
 					num++;
 				}
-				MineSweeperArray[i][Size-1].BombCount = num;      //Низ
+				MineSweeperArray[i][Size-1].BombCount = num;      //РќРёР·
 		 }
 		 num = 0;
 
@@ -275,7 +275,7 @@ PaintBox1->Left = 10;
 PaintBox1->Height = 1+15*Size;
 PaintBox1->Width = 15*Size;
 
-//////////////////////////////////////////////////отрисовывание клеток
+//////////////////////////////////////////////////РѕС‚СЂРёСЃРѕРІС‹РІР°РЅРёРµ РєР»РµС‚РѕРє
 for(j = 0; j < Size; j++)
 {
 	for(i = 0; i < Size; i++)
@@ -287,10 +287,10 @@ for(j = 0; j < Size; j++)
 	}
 }
 
-/////////////заполнение бомб
+/////////////Р·Р°РїРѕР»РЅРµРЅРёРµ Р±РѕРјР±
 PushBombs(Size,BombCount);
 
-/////////////заполнение клеток цифрами
+/////////////Р·Р°РїРѕР»РЅРµРЅРёРµ РєР»РµС‚РѕРє С†РёС„СЂР°РјРё
 CountBombsNearCells(Size);
 
 }
@@ -301,7 +301,7 @@ void __fastcall TForm1::DrawField(unsigned int Size)
 	int i = 0;
 	int j = 0;
 
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("ButtonTypes\\Cell.bmp");
 
 	for(j = 0; j < Size; j++)
@@ -319,55 +319,55 @@ void __fastcall TForm1::WhatIsNumber(int XPos,int YPos)
 {
 	if(MineSweeperArray[XPos][YPos].BombCount == 1)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\1.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 if(MineSweeperArray[XPos][YPos].BombCount == 2)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\2.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 3)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\3.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 4)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\4.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 5)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\5.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 6)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\6.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 7)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\7.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
 
 if(MineSweeperArray[XPos][YPos].BombCount == 8)
 {
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("ButtonTypes\\8.bmp");
 PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 }
@@ -386,10 +386,10 @@ if(!MineSweeperArray[x][y].isOpen)
 		{
 		WhatIsNumber(x,y);
 		MineSweeperArray[x][y].isOpen = true;
-		++MineSweeperArray[x][y].CountOfOpen;//прибавляем к количеству окрытых ячеек
+		++MineSweeperArray[x][y].CountOfOpen;//РїСЂРёР±Р°РІР»СЏРµРј Рє РєРѕР»РёС‡РµСЃС‚РІСѓ РѕРєСЂС‹С‚С‹С… СЏС‡РµРµРє
 		if(MineSweeperArray[x][y].BombCount == 0)
 				{
-				Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+				Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 				Picture->LoadFromFile("ButtonTypes\\EmptyCell.bmp");
 				PaintBox1->Canvas->Draw(x*15,y*15,Picture);
 				CheckRekursively(x+1,y);
@@ -438,36 +438,36 @@ void __fastcall TForm1::OpenAll()
 		if(!MineSweeperArray[i][j].isOpen)
 		{
 
-			if(MineSweeperArray[i][j].isBomb == true && MineSweeperArray[i][j].isFlag == true)//если бомбу закрыл флаг,оставляем флаг
+			if(MineSweeperArray[i][j].isBomb == true && MineSweeperArray[i][j].isFlag == true)//РµСЃР»Рё Р±РѕРјР±Сѓ Р·Р°РєСЂС‹Р» С„Р»Р°Рі,РѕСЃС‚Р°РІР»СЏРµРј С„Р»Р°Рі
 			{
-				Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+				Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 				Picture->LoadFromFile("ButtonTypes\\Flag.bmp");
 				PaintBox1->Canvas->Draw(i*15,j*15,Picture);
 			}
-			if(MineSweeperArray[i][j].isBomb == false && MineSweeperArray[i][j].isFlag == true)//если флаг закрыл не бомбу,выводи зачеркнтую бомбу
+			if(MineSweeperArray[i][j].isBomb == false && MineSweeperArray[i][j].isFlag == true)//РµСЃР»Рё С„Р»Р°Рі Р·Р°РєСЂС‹Р» РЅРµ Р±РѕРјР±Сѓ,РІС‹РІРѕРґРё Р·Р°С‡РµСЂРєРЅС‚СѓСЋ Р±РѕРјР±Сѓ
 			{
-				Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+				Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 				Picture->LoadFromFile("ButtonTypes\\CrossedOutBomb.bmp");
 				PaintBox1->Canvas->Draw(i*15,j*15,Picture);
 			}
-			if(MineSweeperArray[i][j].isBomb == true && MineSweeperArray[i][j].isFlag == false)//если бомбу ничто не закрывает,выводим бомбу.
+			if(MineSweeperArray[i][j].isBomb == true && MineSweeperArray[i][j].isFlag == false)//РµСЃР»Рё Р±РѕРјР±Сѓ РЅРёС‡С‚Рѕ РЅРµ Р·Р°РєСЂС‹РІР°РµС‚,РІС‹РІРѕРґРёРј Р±РѕРјР±Сѓ.
 			{
-				Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+				Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 				Picture->LoadFromFile("ButtonTypes\\Bomb.bmp");
 				PaintBox1->Canvas->Draw(i*15,j*15,Picture);
 			}
-			if(MineSweeperArray[i][j].BombCount == 0 && MineSweeperArray[i][j].isFlag == false && MineSweeperArray[i][j].isBomb == false )//если пустая клетка
+			if(MineSweeperArray[i][j].BombCount == 0 && MineSweeperArray[i][j].isFlag == false && MineSweeperArray[i][j].isBomb == false )//РµСЃР»Рё РїСѓСЃС‚Р°СЏ РєР»РµС‚РєР°
 			{
-                Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+                Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 				Picture->LoadFromFile("ButtonTypes\\EmptyCell.bmp");
 				PaintBox1->Canvas->Draw(i*15,j*15,Picture);
 			}
 			if(MineSweeperArray[i][j].BombCount != 0 && MineSweeperArray[i][j].isFlag == false && MineSweeperArray[i][j].isBomb == false)
 			{
-			WhatIsNumber(i,j);//проверка числа
+			WhatIsNumber(i,j);//РїСЂРѕРІРµСЂРєР° С‡РёСЃР»Р°
 			}
 			MineSweeperArray[i][j].isOpen = true;
-			++MineSweeperArray[i][j].CountOfOpen;//прибавляем к количеству окрытых ячеек
+			++MineSweeperArray[i][j].CountOfOpen;//РїСЂРёР±Р°РІР»СЏРµРј Рє РєРѕР»РёС‡РµСЃС‚РІСѓ РѕРєСЂС‹С‚С‹С… СЏС‡РµРµРє
 		}
 
 	}
@@ -483,37 +483,37 @@ CreateGame(9);
 
 void __fastcall TForm1::CreateGame(unsigned int Size)
 {
-//////////////////////////////////задание размеров форме
+//////////////////////////////////Р·Р°РґР°РЅРёРµ СЂР°Р·РјРµСЂРѕРІ С„РѕСЂРјРµ
 Form1->ClientHeight = 80+15*Size;
 Form1->ClientWidth = 20+15*Size;
 Form1->Color = clWhite;
-///////////////////////////////////////динамическое создание панели
+///////////////////////////////////////РґРёРЅР°РјРёС‡РµСЃРєРѕРµ СЃРѕР·РґР°РЅРёРµ РїР°РЅРµР»Рё
 ArrayOfPanels[0]  = new TPanel (this);
 ArrayOfPanels[0] ->Parent = this;
-ArrayOfPanels[0] ->ParentBackground = false;//для того чтобы заливало панель
-ArrayOfPanels[0] ->BorderStyle = bsSingle;//панель становится выпуклой
+ArrayOfPanels[0] ->ParentBackground = false;//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ Р·Р°Р»РёРІР°Р»Рѕ РїР°РЅРµР»СЊ
+ArrayOfPanels[0] ->BorderStyle = bsSingle;//РїР°РЅРµР»СЊ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РІС‹РїСѓРєР»РѕР№
 ArrayOfPanels[0] ->Color = cl3DLight;
 ArrayOfPanels[0] ->Top = 0;
 ArrayOfPanels[0] ->Left = 0;
 ArrayOfPanels[0] ->Height = 65;
 ArrayOfPanels[0] ->Width = 21+15*Size;
-ArrayOfPanels[0] ->OnMouseDown = FaceButtonMouseDown;//создаем событие
-ArrayOfPanels[0] ->OnMouseUp =  FaceButtonMouseUp;//создаем событие
-///////////////////////////////////////динамическое создание панели
+ArrayOfPanels[0] ->OnMouseDown = FaceButtonMouseDown;//СЃРѕР·РґР°РµРј СЃРѕР±С‹С‚РёРµ
+ArrayOfPanels[0] ->OnMouseUp =  FaceButtonMouseUp;//СЃРѕР·РґР°РµРј СЃРѕР±С‹С‚РёРµ
+///////////////////////////////////////РґРёРЅР°РјРёС‡РµСЃРєРѕРµ СЃРѕР·РґР°РЅРёРµ РїР°РЅРµР»Рё
 ArrayOfPanels[1] = new TPanel (this);
 ArrayOfPanels[1]->Parent = this;
-ArrayOfPanels[1]->BorderStyle = bsSingle;//панель становится выпуклой
+ArrayOfPanels[1]->BorderStyle = bsSingle;//РїР°РЅРµР»СЊ СЃС‚Р°РЅРѕРІРёС‚СЃСЏ РІС‹РїСѓРєР»РѕР№
 ArrayOfPanels[1]->Color = clWhite;
 ArrayOfPanels[1]->Top = 12;
 ArrayOfPanels[1]->Left = 10;
 ArrayOfPanels[1]->Height = 40;
 ArrayOfPanels[1]->Width = 15*Size;
-ArrayOfPanels[1]->OnMouseDown = FaceButtonMouseDown;//создаем событие
-ArrayOfPanels[1]->OnMouseUp =  FaceButtonMouseUp;//создаем событие
+ArrayOfPanels[1]->OnMouseDown = FaceButtonMouseDown;//СЃРѕР·РґР°РµРј СЃРѕР±С‹С‚РёРµ
+ArrayOfPanels[1]->OnMouseUp =  FaceButtonMouseUp;//СЃРѕР·РґР°РµРј СЃРѕР±С‹С‚РёРµ
 
-/////////////////////////динамическое создание кнопки с лицом на главном экране
+/////////////////////////РґРёРЅР°РјРёС‡РµСЃРєРѕРµ СЃРѕР·РґР°РЅРёРµ РєРЅРѕРїРєРё СЃ Р»РёС†РѕРј РЅР° РіР»Р°РІРЅРѕРј СЌРєСЂР°РЅРµ
 
-Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 Picture->LoadFromFile("Emotions\\Smile.bmp");
 
 FaceButton = new TBitBtn (this);
@@ -572,14 +572,14 @@ Close();
 }
 void __fastcall TForm1::IFDead()
 {
- Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+ Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
  Picture->LoadFromFile("Emotions\\Lose.bmp");
  FaceButton->Glyph = Picture;
 }
 //---------------------------------------------------------------------------
 void __fastcall TForm1::FaceButtonMouseDown(TObject *Sender, TMouseButton Button,TShiftState Shift, int X, int Y)
 {
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("Emotions\\Click.bmp");
 	FaceButton->Glyph = Picture;
 }
@@ -588,19 +588,19 @@ void __fastcall TForm1::FaceButtonMouseUp(TObject *Sender, TMouseButton Button,T
 {
 	if(isLose == 0)
 	{
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("Emotions\\Smile.bmp");
 	FaceButton->Glyph = Picture;
 	}
 	if(isLose == 1)
 	{
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("Emotions\\Lose.bmp");
 	FaceButton->Glyph = Picture;
 	}
 	if(isWin == 1)
 	{
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("Emotions\\Win.bmp");
 	FaceButton->Glyph = Picture;
 	}
@@ -619,19 +619,19 @@ if(MineSweeperArray[XPos][YPos].isOpen == 1)
 
 if(Button == mbLeft)
 {
-	FaceButtonMouseDown(Sender,Button,Shift,X,Y);//для изменение картинки кнопки с лицом
+	FaceButtonMouseDown(Sender,Button,Shift,X,Y);//РґР»СЏ РёР·РјРµРЅРµРЅРёРµ РєР°СЂС‚РёРЅРєРё РєРЅРѕРїРєРё СЃ Р»РёС†РѕРј
 
 
 
 	if(MineSweeperArray[XPos][YPos].BombCount == 0)
 	{
-		CheckRekursively(XPos, YPos);//если нажата пустая клетка
+		CheckRekursively(XPos, YPos);//РµСЃР»Рё РЅР°Р¶Р°С‚Р° РїСѓСЃС‚Р°СЏ РєР»РµС‚РєР°
 	}
 
 	if(MineSweeperArray[XPos][YPos].isBomb == true)
 	{
 
-	Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+	Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 	Picture->LoadFromFile("ButtonTypes\\RedBomb.bmp");
 	PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 	MineSweeperArray[XPos][YPos].isOpen = true;
@@ -641,15 +641,15 @@ if(Button == mbLeft)
 	}
 	else
 	{
-	WhatIsNumber(XPos,YPos);//проверка числа
+	WhatIsNumber(XPos,YPos);//РїСЂРѕРІРµСЂРєР° С‡РёСЃР»Р°
 	Win();
 	}
 }
-	if(Button == mbRight)//клик правой кнопкой
+	if(Button == mbRight)//РєР»РёРє РїСЂР°РІРѕР№ РєРЅРѕРїРєРѕР№
 	{
 		if(MineSweeperArray[XPos][YPos].isFlag == 1)
 		{
-		Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+		Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 		Picture->LoadFromFile("ButtonTypes\\Cell.bmp");
 		PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 		MineSweeperArray[XPos][YPos].isFlag = 0;
@@ -658,7 +658,7 @@ if(Button == mbLeft)
 
 		if(MineSweeperArray[XPos][YPos].isFlag == 0)
 		{
-		Picture = new Graphics::TBitmap();//для того чтобы присвоить картинку
+		Picture = new Graphics::TBitmap();//РґР»СЏ С‚РѕРіРѕ С‡С‚РѕР±С‹ РїСЂРёСЃРІРѕРёС‚СЊ РєР°СЂС‚РёРЅРєСѓ
 		Picture->LoadFromFile("ButtonTypes\\Flag.bmp");
 		PaintBox1->Canvas->Draw(XPos*15,YPos*15,Picture);
 		MineSweeperArray[XPos][YPos].isFlag = 1;
@@ -671,4 +671,3 @@ void __fastcall TForm1::About1Click(TObject *Sender)
 Form2->Show();
 }
 //---------------------------------------------------------------------------
-
