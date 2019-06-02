@@ -22,7 +22,7 @@ void menu(RenderWindow & window) {
 	record.setOutlineColor(Color::Black);   //параметры для записи текста рекорда
 	record.setFillColor(Color::Black);
 	record.setStyle(Text::Bold);
-
+	
 	Texture menuTexture1, menuTexture2, menuTexture3, aboutTexture, menuBackground;      //фон,картинки и т.д.
 	menuTexture1.loadFromFile("111.png");	
 	menuTexture3.loadFromFile("333.png");
