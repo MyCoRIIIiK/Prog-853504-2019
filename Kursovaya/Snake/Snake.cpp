@@ -4,7 +4,7 @@
 
 #include "Unit1.h"
 #include <stdlib.h>
-#include "math.h"                          // Для рандома
+#include "math.h"                          // Р”Р»СЏ СЂР°РЅРґРѕРјР°
 #include "time.h"
 
 #define UP 0
@@ -28,10 +28,6 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 }
 
-// ==========================================================================
-//                                                                  переменные
-// ==========================================================================
-
 bool ateFood = false;
 
 int world[25][25];
@@ -47,10 +43,6 @@ int direction, lastDirection, reverseDirection;
 int span;
 int maxSize = 25;
 int iterations = 0;
-
-// ==========================================================================
-//                                                                  функции
-// ==========================================================================
 
 
 void render(void) {
@@ -68,25 +60,25 @@ void render(void) {
    for (east=0; east<maxSize; east++) {
 	  for (south=0; south<maxSize; south++) {
 		 switch (world[east][south]) {
-			case EMPTY:                                        // пустое место
+			case EMPTY:                                        // РїСѓСЃС‚РѕРµ РјРµСЃС‚Рѕ
 			   Form1->Canvas->Pen->Color=clWhite;
 			   Form1->Canvas->Brush->Color=clWhite;
 			   Form1->Canvas->Rectangle
 				  (east*20,south*20,east*20+20,south*20+20);
 			   break;
-			case SNAKE:                                        // змея
+			case SNAKE:                                        // Р·РјРµСЏ
 			   Form1->Canvas->Pen->Color=clLime;
 			   Form1->Canvas->Brush->Color=clLime;
 			   Form1->Canvas->Rectangle
 				  (east*20,south*20,east*20+20,south*20+20);
 			   break;
-			case FOOD:                                        // еда
+			case FOOD:                                        // РµРґР°
 			   Form1->Canvas->Pen->Color=clGreen;
 			   Form1->Canvas->Brush->Color=clGreen;
 			   Form1->Canvas->Rectangle
 				  (east*20,south*20,east*20+20,south*20+20);
 			   break;
-			case POISON:                                        // яд
+			case POISON:                                        // СЏРґ
 			   Form1->Canvas->Pen->Color=clRed;
 			   Form1->Canvas->Brush->Color=clRed;
 			   Form1->Canvas->Rectangle
@@ -95,7 +87,7 @@ void render(void) {
 		 }
 	  }
    }
-	//перемещениее змейки
+	//РїРµСЂРµРјРµС‰РµРЅРёРµРµ Р·РјРµР№РєРё
 
    switch (direction) {
 	  case UP: {
@@ -150,7 +142,7 @@ void clearAll (void) {
    render();
 }
 
-//---------------------------------------------------------- рандомизация еды
+//---------------------------------------------------------- СЂР°РЅРґРѕРјРёР·Р°С†РёСЏ РµРґС‹
 void makeRandomFood (void) {
    // make 30 random food
    for (int i = 0; i < 30; i++) {
@@ -158,7 +150,7 @@ void makeRandomFood (void) {
    }
 }
 
-//-------------------------------------------------------- рандомный яд
+//-------------------------------------------------------- СЂР°РЅРґРѕРјРЅС‹Р№ СЏРґ
 void makeRandomPoison (void) {
    // make 20 random poison
    for (int i = 0; i < 20; i++) {
@@ -166,7 +158,7 @@ void makeRandomPoison (void) {
    }
 }
 
-//--------------------------------------------------------- позиция змейки в начале игры
+//--------------------------------------------------------- РїРѕР·РёС†РёСЏ Р·РјРµР№РєРё РІ РЅР°С‡Р°Р»Рµ РёРіСЂС‹
 
 
 void makeRandomSnake (void) {
@@ -182,12 +174,12 @@ void makeRandomSnake (void) {
 		 direction = 2;
 		 break;
    }
-   // рандомная позиция головы
+   // СЂР°РЅРґРѕРјРЅР°СЏ РїРѕР·РёС†РёСЏ РіРѕР»РѕРІС‹
    snakeHeadE = 1 + random(15);
    snakeHeadS = 1 + random(23);
 
    snakeLength = 3;
-   //построение тела змейки
+   //РїРѕСЃС‚СЂРѕРµРЅРёРµ С‚РµР»Р° Р·РјРµР№РєРё
    for (int span = 0; span < snakeLength; span++) {
 	  world[snakeHeadE + span][snakeHeadS] = SNAKE;
 	  snakeE[span] = snakeHeadE + span;
@@ -203,11 +195,11 @@ void step (void) {
    reverseDirection = direction + 2;
    if (reverseDirection > 3) reverseDirection = reverseDirection - 4;
    if (lastDirection == reverseDirection) direction = lastDirection;
-   // направление головы в зависимости от кнопки
+   // РЅР°РїСЂР°РІР»РµРЅРёРµ РіРѕР»РѕРІС‹ РІ Р·Р°РІРёСЃРёРјРѕСЃС‚Рё РѕС‚ РєРЅРѕРїРєРё
 	  switch (direction) {
 		 case UP:
 			snakeHeadS--;
-			if (snakeHeadS < 0) snakeHeadS = 24;   //если за пределы вышел, появляется в противоположном месте
+			if (snakeHeadS < 0) snakeHeadS = 24;   //РµСЃР»Рё Р·Р° РїСЂРµРґРµР»С‹ РІС‹С€РµР», РїРѕСЏРІР»СЏРµС‚СЃСЏ РІ РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕРј РјРµСЃС‚Рµ
 			break;
 		 case RIGHT:
 			snakeHeadE++;
@@ -222,21 +214,21 @@ void step (void) {
 			if (snakeHeadE  <0) snakeHeadE = 24;
 			break;
 	  }
-   // если сьел себя или яд гг
+   // РµСЃР»Рё СЃСЊРµР» СЃРµР±СЏ РёР»Рё СЏРґ РіРі
    if (world[snakeHeadE][snakeHeadS] == 3) gameOver();
    if (world[snakeHeadE][snakeHeadS] == 1) gameOver();
-   // если сьел еду
+   // РµСЃР»Рё СЃСЊРµР» РµРґСѓ
    if (world[snakeHeadE][snakeHeadS] == 2) ateFood = true;
    world[snakeHeadE][snakeHeadS] = SNAKE;
-   // перемещает тело змейки
+   // РїРµСЂРµРјРµС‰Р°РµС‚ С‚РµР»Рѕ Р·РјРµР№РєРё
    for (segment = snakeLength + 1; segment > 0; segment --) {
 	  snakeE[segment] = snakeE[segment - 1];
 	  snakeS[segment] = snakeS[segment - 1];
    }
-   // тоже перемещает
+   // С‚РѕР¶Рµ РїРµСЂРµРјРµС‰Р°РµС‚
    snakeE[segment] = snakeHeadE;
    snakeS[segment] = snakeHeadS;
-   // удаляет хвост змеи, если не была сьедена еда
+   // СѓРґР°Р»СЏРµС‚ С…РІРѕСЃС‚ Р·РјРµРё, РµСЃР»Рё РЅРµ Р±С‹Р»Р° СЃСЊРµРґРµРЅР° РµРґР°
    if (!ateFood) {
 	  snakeTailE = snakeE[snakeLength ];
 	  snakeTailS = snakeS[snakeLength ];
@@ -248,7 +240,7 @@ void step (void) {
    lastDirection = direction;
    world[snakeTailE][snakeTailS] = false;
    render();
-   // длина змейки
+   // РґР»РёРЅР° Р·РјРµР№РєРё
    Form1->EditLength->Text = snakeLength;
 }
 
@@ -269,18 +261,18 @@ void __fastcall TForm1::FormShow(TObject *Sender)
 void __fastcall TForm1::ButtonBeginClick(TObject *Sender)
 {
    begin();
-   EditLength->SetFocus();       // чтобы управление было змейков через стрелки
+   EditLength->SetFocus();       // С‡С‚РѕР±С‹ СѓРїСЂР°РІР»РµРЅРёРµ Р±С‹Р»Рѕ Р·РјРµР№РєРѕРІ С‡РµСЂРµР· СЃС‚СЂРµР»РєРё
 }
 
 
-//                   таймер для ходьбы змейки
+//                   С‚Р°Р№РјРµСЂ РґР»СЏ С…РѕРґСЊР±С‹ Р·РјРµР№РєРё
 void __fastcall TForm1::Timer1Timer(TObject *Sender)
 {
    step();
    Application->ProcessMessages();
 }
 
-//------------------------------------------------------------- нажатие клавишь
+//------------------------------------------------------------- РЅР°Р¶Р°С‚РёРµ РєР»Р°РІРёС€СЊ
 void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
 	  TShiftState Shift)
 {
@@ -290,10 +282,3 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
    if (Key == VK_DOWN) direction = 2;
    if (Key == VK_NUMPAD0) begin();
 }
-
-
-
-
-
-
-
