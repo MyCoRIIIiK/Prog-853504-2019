@@ -35,7 +35,6 @@ void menu(RenderWindow & window) {
 
 	PlayerRecord << Max;
 	
-
 	
 	menu1.setPosition(100, 30);	
 	menu3.setPosition(100, 150);
