@@ -161,16 +161,16 @@ begin:    RenderWindow app(VideoMode(400, 533), "Doodle Game!");
 	if (y<h)                   //перемещение экрана 
     for (int i=0;i<10;i++)
     {
-      y=h;
+      y=h;                           
       plat[i].y=plat[i].y-dy;
-      if (plat[i].y>533) {plat[i].y=0; plat[i].x=rand()%400;}
+      if (plat[i].y>533) {plat[i].y=0; plat[i].x=rand()%400;}        //генерация платформ
     }
 
 	for (int i = 0; i < 10; i++)           //перемещение дудла
 	{
 		if ((x + 50 > plat[i].x) && (x + 20 < plat[i].x + 68)
 			&& (y + 70 > plat[i].y) && (y + 70 < plat[i].y + 14) && (dy > 0)) 
-			  dy = -10;
+			  dy = -10;      //сила отталкивания от платформы
 	}
 
 	sPers.setPosition(x,y);
